@@ -16,6 +16,7 @@ containers:
       - LLM_API_KEY
       - QMD_API_SECRET
       - QMD_GPU_URL
+      - CRON_WEBHOOK_SECRET
     command: []
 
 shim:
