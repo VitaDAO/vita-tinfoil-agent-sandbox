@@ -54,7 +54,7 @@ jobs:
         with:
           config-file: ${{ github.workspace }}/tinfoil-config.yml
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          prerelease: "true"
+          prerelease: "false"
 
       # Commit updated config back to repo so dashboard can validate it
       - run: |
