@@ -1,0 +1,24 @@
+name: vita-sandbox
+image: ghcr.io/vitadao/vita-sandbox:latest
+resources:
+  cpu: 2
+  memory: 4Gi
+shim:
+  paths:
+    - path: /invoke
+      target: http://127.0.0.1:3000/invoke
+    - path: /ingest
+      target: http://127.0.0.1:3000/ingest
+    - path: /health
+      target: http://127.0.0.1:3000/health
+secrets:
+  - LLM_BASE_URL
+  - LLM_API_KEY
+  - LLM_MODEL_ID
+  - LLM_MODEL_NAME
+  - CRON_WEBHOOK_URL
+  - CRON_WEBHOOK_SECRET
+  - QMD_API_SECRET
+  - AUBRAI_WEBHOOK_URL
+  - DATA_QUERY_URL
+  - SANDBOX_AUTH_SECRET

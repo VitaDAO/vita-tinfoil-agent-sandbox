@@ -1,0 +1,42 @@
+{
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "llm": {
+        "baseUrl": "${LLM_BASE_URL}",
+        "apiKey": "${LLM_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "${LLM_MODEL_ID}",
+            "name": "${LLM_MODEL_NAME}",
+            "contextWindow": 32768,
+            "maxTokens": 4096,
+            "reasoning": true,
+            "cost": { "input": 0, "output": 0 }
+          }
+        ]
+      }
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "port": 18789,
+    "auth": { "mode": "none" },
+    "bind": "loopback"
+  },
+  "cron": {
+    "webhookToken": "${CRON_WEBHOOK_SECRET}"
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "llm/${LLM_MODEL_ID}"
+      },
+      "workspace": "/home/user/.openclaw/workspace",
+      "memorySearch": {
+        "enabled": false
+      }
+    }
+  }
+}
