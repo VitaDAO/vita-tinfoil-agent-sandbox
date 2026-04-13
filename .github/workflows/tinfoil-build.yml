@@ -40,12 +40,14 @@ jobs:
             --push \
             -t "$IMAGE_LOWER" .
           DIGEST=$(docker buildx imagetools inspect "$IMAGE_LOWER" --format '{{.Manifest.Digest}}')
-          echo "image=${IMAGE_LOWER}@${DIGEST}" >> "$GITHUB_OUTPUT"
-          echo "Built and pushed: ${IMAGE_LOWER}@${DIGEST}"
+          FULL_REF="${IMAGE_LOWER}@${DIGEST}"
+          echo "image=${FULL_REF}" >> "$GITHUB_OUTPUT"
+          echo "Built and pushed: ${FULL_REF}"
 
-      # Update tinfoil-config.yml with the built image+digest
+      # Update tinfoil-config.yml with the real image+digest
       - run: |
-          sed -i "s|image:.*|image: \"${{ steps.build.outputs.image }}\"|" tinfoil-config.yml
+          sed -i 's|image:.*|image: "${{ steps.build.outputs.image }}"|' tinfoil-config.yml
+          echo "Updated config:"
           cat tinfoil-config.yml
 
       # Tinfoil attestation
@@ -54,3 +56,11 @@ jobs:
           config-file: ${{ github.workspace }}/tinfoil-config.yml
           github-token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: "true"
+
+      # Commit updated config back to repo so dashboard can validate it
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tinfoil-config.yml
+          git commit -m "Update image digest to ${{ github.ref_name }}" || echo "No changes to commit"
+          git push origin HEAD:main
