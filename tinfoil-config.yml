@@ -1,24 +1,28 @@
-name: vita-sandbox
-image: ghcr.io/vitadao/vita-sandbox:latest
-resources:
-  cpu: 2
-  memory: 4Gi
+cvm-version: 0.7.1
+cpus: 2
+memory: 8192
+
+containers:
+  - name: "sandbox"
+    image: "Dockerfile"
+    env:
+      - LOG_LEVEL: "info"
+    secrets:
+      - LLM_BASE_URL
+      - LLM_API_KEY
+      - LLM_MODEL_ID
+      - LLM_MODEL_NAME
+      - CRON_WEBHOOK_URL
+      - CRON_WEBHOOK_SECRET
+      - QMD_API_SECRET
+      - AUBRAI_WEBHOOK_URL
+      - DATA_QUERY_URL
+      - SANDBOX_AUTH_SECRET
+    command: []
+
 shim:
+  upstream-port: 3000
   paths:
-    - path: /invoke
-      target: http://127.0.0.1:3000/invoke
-    - path: /ingest
-      target: http://127.0.0.1:3000/ingest
-    - path: /health
-      target: http://127.0.0.1:3000/health
-secrets:
-  - LLM_BASE_URL
-  - LLM_API_KEY
-  - LLM_MODEL_ID
-  - LLM_MODEL_NAME
-  - CRON_WEBHOOK_URL
-  - CRON_WEBHOOK_SECRET
-  - QMD_API_SECRET
-  - AUBRAI_WEBHOOK_URL
-  - DATA_QUERY_URL
-  - SANDBOX_AUTH_SECRET
+    - /invoke
+    - /ingest
+    - /health
