@@ -6,7 +6,7 @@ containers:
   - name: "sandbox"
     # Image is automatically updated by the GitHub Actions workflow
     # with the ghcr.io reference + SHA256 digest after build
-    image: "ghcr.io/vitadao/vita-tinfoil-agent-sandbox:v0.3.1@sha256:58453f86905eb66bdee36491a385b5541055840832428ba9084e9761003a4c7c"
+    image: "ghcr.io/vitadao/vita-tinfoil-agent-sandbox:v0.3.1@sha256:1d055c1e73a6c6efb764737703d6a37eb13908c0097fc005f57f9af3aa2dc380"
     env:
       - LOG_LEVEL: "info"
       - LLM_MODEL_ID: "minimax-m2.5"
