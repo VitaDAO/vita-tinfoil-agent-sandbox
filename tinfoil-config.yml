@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "sandbox"
-    image: "amitvita/vita-tinfoil-sandbox:0.1.0"
+    image: "amitvita/vita-tinfoil-sandbox:0.1.0@sha256:f9c92fb0b18b965a11f756500895aa8892e181d68aa140d9a964ec30161e684d"
     env:
       - LOG_LEVEL: "info"
       - LLM_MODEL_ID: "minimax-m2.5"
