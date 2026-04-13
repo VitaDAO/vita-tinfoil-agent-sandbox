@@ -7,17 +7,13 @@ containers:
     image: "Dockerfile"
     env:
       - LOG_LEVEL: "info"
+      - LLM_MODEL_ID: "minimax-m2.5"
+      - LLM_MODEL_NAME: "minimax-m2.5"
     secrets:
       - LLM_BASE_URL
       - LLM_API_KEY
-      - LLM_MODEL_ID
-      - LLM_MODEL_NAME
-      - CRON_WEBHOOK_URL
-      - CRON_WEBHOOK_SECRET
       - QMD_API_SECRET
-      - AUBRAI_WEBHOOK_URL
-      - DATA_QUERY_URL
-      - SANDBOX_AUTH_SECRET
+      - QMD_GPU_URL
     command: []
 
 shim:
