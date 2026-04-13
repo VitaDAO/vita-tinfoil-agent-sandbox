@@ -36,7 +36,6 @@ jobs:
           IMAGE_LOWER=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
           docker buildx build \
             --platform linux/amd64 \
-            --provenance=false \
             --push \
             -t "$IMAGE_LOWER" .
           DIGEST=$(docker buildx imagetools inspect "$IMAGE_LOWER" --format '{{.Manifest.Digest}}')
