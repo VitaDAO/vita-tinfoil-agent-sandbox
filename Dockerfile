@@ -15,7 +15,7 @@ COPY package.json ./
 RUN npm install --omit=dev
 COPY openclaw.json ./
 COPY run-agent.mjs ./
-COPY cron-watcher.js ./
+COPY cron-watcher.cjs ./
 COPY server.mjs ./
 COPY decrypt.mjs ./
 COPY fetch-health-data.mjs ./

@@ -24,7 +24,7 @@ if [ "$GW_READY" != "true" ]; then
 fi
 
 # Start cron-watcher (background)
-node /app/cron-watcher.js &
+node /app/cron-watcher.cjs &
 echo "[boot] Cron watcher started"
 
 # Start HTTP server (foreground — keeps container alive)
