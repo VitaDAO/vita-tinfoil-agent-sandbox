@@ -11,10 +11,14 @@ RUN npm install -g openclaw@2026.3.11 \
 
 # App code
 WORKDIR /app
+COPY package.json ./
+RUN npm install --omit=dev
 COPY openclaw.json ./
 COPY run-agent.mjs ./
 COPY cron-watcher.js ./
 COPY server.mjs ./
+COPY decrypt.mjs ./
+COPY fetch-health-data.mjs ./
 COPY boot.sh ./
 COPY skills/ ./skills/
 

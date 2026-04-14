@@ -1,0 +1,8 @@
+{
+  "name": "vita-tinfoil-agent-sandbox",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "libsodium-wrappers-sumo": "0.8.2"
+  }
+}

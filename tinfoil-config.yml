@@ -17,11 +17,15 @@ containers:
       - QMD_API_SECRET
       - QMD_GPU_URL
       - CRON_WEBHOOK_SECRET
+      - SANDBOX_AUTH_SECRET
+      - SUPABASE_URL
+      - SUPABASE_SERVICE_ROLE_KEY
     command: []
 
 shim:
   upstream-port: 3000
   paths:
     - /invoke
+    - /unlock
     - /ingest
     - /health
