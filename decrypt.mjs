@@ -1,4 +1,6 @@
-import sodium from "libsodium-wrappers-sumo";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const sodium = require("libsodium-wrappers-sumo");
 
 const SECRETBOX_NONCE_BYTES = 24;
 const CATEGORY_DEK_NONCE_BYTES = 24;
