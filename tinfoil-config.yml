@@ -27,5 +27,6 @@ shim:
   paths:
     - /invoke
     - /unlock
+    - /unlock-session
     - /ingest
     - /health

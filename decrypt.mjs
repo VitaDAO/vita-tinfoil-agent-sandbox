@@ -202,6 +202,18 @@ export function getCategoryDEK(session, category) {
   return dek;
 }
 
+/**
+ * Unlocks a key session from a raw userDEK (sent directly from VitaApp).
+ * No passphrase derivation needed — VitaApp already unwrapped the DEK.
+ */
+export async function unlockKeySessionFromDEK({ userDEK, categoryRows }) {
+  if (!userDEK || !(userDEK instanceof Uint8Array)) {
+    throw new Error("userDEK must be a Uint8Array");
+  }
+  const categoryDEKs = await unwrapCategoryKeys(categoryRows, userDEK);
+  return { userDEK, categoryDEKs };
+}
+
 export async function decryptHealthData({ session, category, encrypted_payload, encryption_nonce }) {
   const categoryDEK = getCategoryDEK(session, category);
   return decryptRecord(fromHex(encrypted_payload), fromHex(encryption_nonce), categoryDEK);
