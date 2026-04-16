@@ -9,9 +9,8 @@ containers:
     image: "ghcr.io/vitadao/vita-tinfoil-agent-sandbox:v0.4.2@sha256:848978202f5b11fde37f017ac63a1c413b4fff58243b5211d7d927a62027e725"
     env:
       - LOG_LEVEL: "info"
-      # Dynamic — overridden per-sandbox via Admin API variables
-      - LLM_MODEL_ID: ""
-      - LLM_MODEL_NAME: ""
+      - LLM_MODEL_ID: "kimi-k2-5"
+      - LLM_MODEL_NAME: "Kimi K2.5"
       - SANDBOX_USER_ID: ""
     secrets:
       - LLM_BASE_URL
