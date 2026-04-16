@@ -388,7 +388,7 @@ async function handleUnlockSession(req, res) {
 
 async function handleInvoke(req, res) {
   const body = await readBody(req);
-  const { message, session_id, user_id, supermemory } = body;
+  const { message, session_id, user_id, supermemory, llm_model_id, llm_model_name } = body;
 
   if (!message || !user_id) {
     res.writeHead(400, { "Content-Type": "application/json" });
@@ -419,10 +419,15 @@ async function handleInvoke(req, res) {
     return;
   }
 
+  // Override LLM model from invoke body if provided (fallback for env var injection)
+  const spawnEnv = { ...process.env, HOME: "/home/user" };
+  if (llm_model_id) spawnEnv.LLM_MODEL_ID = llm_model_id;
+  if (llm_model_name) spawnEnv.LLM_MODEL_NAME = llm_model_name;
+
   // QMD URL from env only (not from request body — prevents SSRF)
   const input = JSON.stringify({ message, session_id, user_id, qmd_url: QMD_URL });
   const result = spawnSync("node", ["/app/run-agent.mjs"], {
-    env: { ...process.env, AGENT_INPUT: input, HOME: "/home/user" },
+    env: { ...spawnEnv, AGENT_INPUT: input },
     timeout: 120000,
     maxBuffer: 10 * 1024 * 1024,
   });
