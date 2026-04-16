@@ -9,8 +9,6 @@ containers:
     image: "ghcr.io/vitadao/vita-tinfoil-agent-sandbox:v0.4.2@sha256:848978202f5b11fde37f017ac63a1c413b4fff58243b5211d7d927a62027e725"
     env:
       - LOG_LEVEL: "info"
-      - LLM_MODEL_ID: "MiniMaxAI/MiniMax-M2.5"
-      - LLM_MODEL_NAME: "MiniMax M2.5"
     secrets:
       - LLM_BASE_URL
       - LLM_API_KEY
